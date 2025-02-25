@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+int findClosestElement(vector<int>& arr, int k) {
+    int closest = INT_MAX; // Variable to store the closest element
+    int minDiff = INT_MAX; // Variable to store the minimum difference
+
+    for (int num : arr) { // Iterate through each element in the array
+        int diff = abs(num - k); // Compute the absolute difference from k
+
+        // If a closer element is found, update closest and minDiff
+        if (diff < minDiff || (diff == minDiff && num < closest)) {
+            closest = num;
+            minDiff = diff;
+        }
+    }
+
+    return closest; // Return the closest element
+}
+
+int main() {
+    vector<int> arr = {4, 7, 10, 2, 5}; // Example array
+    int k = 6; // Target integer
+
+    cout << "Closest element to " << k << " is: " << findClosestElement(arr, k) << endl;
+
+    return 0;
+}
