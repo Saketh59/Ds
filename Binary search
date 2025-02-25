@@ -1,0 +1,41 @@
+// BinarySearch.cpp
+#include <iostream>
+#include <vector>
+#include <algorithm> // For std::sort
+
+// Function to perform binary search
+int binarySearch(const std::vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;  // Avoid potential overflow
+
+        if (arr[mid] == target)
+            return mid;  // Found target at index mid
+        else if (arr[mid] < target)
+            left = mid + 1;  // Search in the right half
+        else
+            right = mid - 1; // Search in the left half
+    }
+    return -1; // Target not found
+}
+
+int main() {
+    std::vector<int> arr = { 34, 7, 23, 32, 5, 62 };
+
+    // Sort the array before binary search
+    std::sort(arr.begin(), arr.end());
+
+    int target;
+    std::cout << "Enter number to search: ";
+    std::cin >> target;
+
+    int result = binarySearch(arr, target);
+    if (result != -1)
+        std::cout << "Element found at index " << result << " in the sorted array." << std::endl;
+    else
+        std::cout << "Element not found." << std::endl;
+
+    return 0;
+}
